@@ -728,7 +728,7 @@ library
                    -- Text.Pandoc.CSV,
                    -- Text.Pandoc.RoffChar,
                    -- Text.Pandoc.UUID,
-                   Text.Pandoc.Slides
+                   Text.Pandoc.Slides,
                    -- Text.Pandoc.Image,
                    -- Text.Pandoc.Citeproc.BibTeX,
                    -- Text.Pandoc.Citeproc.Name,
@@ -737,8 +737,8 @@ library
                    -- Text.Pandoc.Citeproc.Locator,
                    -- Text.Pandoc.Citeproc.MetaValue,
                    -- Text.Pandoc.Citeproc.Util,
-  --                  Paths_pandoc
-  -- autogen-modules: Paths_pandoc
+                   Paths_pandoc
+  autogen-modules: Paths_pandoc
   buildable:       True
 
 -- test-suite test-pandoc
