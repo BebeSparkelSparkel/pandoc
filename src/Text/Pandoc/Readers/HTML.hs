@@ -53,7 +53,6 @@ import Text.Pandoc.Readers.HTML.Parsing
 import Text.Pandoc.Readers.HTML.Table (pTable)
 import Text.Pandoc.Readers.HTML.TagCategories
 import Text.Pandoc.Readers.HTML.Types
-import Text.Pandoc.Readers.LaTeX (rawLaTeXInline)
 import Text.Pandoc.Error
 import Text.Pandoc.Logging
 import Text.Pandoc.Options (
@@ -905,24 +904,8 @@ pTagContents =
   <|> pStr
   <|> pSpace
   <|> smartPunctuation pTagContents
-  <|> pRawTeX
   <|> pSymbol
   <|> pBad
-
-pRawTeX :: PandocMonad m => InlinesParser m Inlines
-pRawTeX = do
-  lookAhead $ try $ do
-    char '\\'
-    choice $ map (try . string) ["begin", "eqref", "ref"]
-  guardEnabled Ext_raw_tex
-  inp <- getInput
-  st <- getState
-  res <- lift $ runParserT (withRaw rawLaTeXInline) st "chunk" inp
-  case res of
-       Left _                -> mzero
-       Right (contents, raw) -> do
-         _ <- count (T.length raw) anyChar
-         return $ B.rawInline "tex" contents
 
 pStr :: PandocMonad m => InlinesParser m Inlines
 pStr = do
